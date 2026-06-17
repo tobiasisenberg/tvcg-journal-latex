@@ -3,6 +3,14 @@
 % OF THE VGTC PUBLICATIONS CHAIR (submissions@vgtc.org).
 %
 % Changelog:
+% -modifications by Tobias Isenberg 2026/03/09
+%   - main template:
+%     - correction of how authors are printed out at the top, which was shifted to the right by about 8pt by mistake
+%       (additional space in tabular environment)
+%     - fixed the spacing in the bibliography section, to take a potential PDF linking error into account
+%     - for this purpose also added another option (protectagainstpdfendlink), that can be used in situations
+%       when this hyperref error appears (at the expense of a slightly longer bibliography section)
+%   - BST files: "pages" abbreviation ro "pp." for numpages entry
 % -modifications by Tobias Isenberg 2025/12/02
 %   - BST files
 %     - abbreviation of ``article no.'' to ``art. no.'' (shorter references)
@@ -179,6 +187,7 @@
 \newtoggle{vgtc@havecopyrightspace}  \toggletrue{vgtc@havecopyrightspace}
 \newtoggle{vgtc@journal}             \togglefalse{vgtc@journal}
 \newtoggle{vgtc@hideappendix}        \togglefalse{vgtc@hideappendix}
+\newtoggle{vgtc@protectagainstpdfendlink} \togglefalse{vgtc@protectagainstpdfendlink}
 
 \newcommand{\vgtc@columnmode}{twocolumn}
 \newcommand{\vgtc@pointsize}{9pt}
@@ -240,6 +249,11 @@
 % 'hideappendix' option
 \DeclareOption{hideappendix}{%
   \toggletrue{vgtc@hideappendix}%
+}
+
+% 'protectagainstpdfendlink' option: to be used if one gets the \pdfendlink ended up in different nesting level than \pdfstartlink error
+\DeclareOption{protectagainstpdfendlink}{%
+  \toggletrue{vgtc@protectagainstpdfendlink}%
 }
 
 % Here's a warning command for use just below.
@@ -672,9 +686,9 @@
   %
   % fix the font size of the bibliography to 8pt
   \newdimen\bibindent
-  \newdimen\bibspacing
+  %\newdimen\bibspacing
   \setlength\bibindent{1em}
-  \setlength{\bibspacing}{\z@}
+  %\setlength{\bibspacing}{\z@}
   \renewenvironment{thebibliography}[1]{%
     \section*{\refname}%
       \scriptsize%
@@ -684,18 +698,30 @@
           \settowidth\labelwidth{\@biblabel{#1}}%
           \leftmargin\labelwidth
           \advance\leftmargin\labelsep
-          \itemsep\bibspacing    % should this be commented out?
-          \parsep\bibspacing     % should this be commented out?
+          %\itemsep\bibspacing    % should this be commented out?
+          %\parsep\bibspacing     % should this be commented out?
+					\iftoggle{vgtc@protectagainstpdfendlink}{%
+					  \setlength{\itemsep}{0pt plus 2pt}% TI: this is an alternative if the \interlinepenalty=10000 below is used
+					  \setlength{\parsep}{0pt plus 2pt}% TI: this is an alternative if the \interlinepenalty=10000 below is used
+					}{%
+					  \setlength{\itemsep}{0pt}%
+					  \setlength{\parsep}{0pt}%
+					}%
           \@openbib@code
           \usecounter{enumiv}%
           \let\p@enumiv\@empty
           \renewcommand\theenumiv{\@arabic\c@enumiv}%
         }%
       \sloppy
-      \clubpenalty4000
-      \@clubpenalty \clubpenalty
-      \widowpenalty4000%
-      \interlinepenalty=10000% added by TI to avoid the \pdfendlink ended up in different nesting level than \pdfstartlink errors
+			\iftoggle{vgtc@protectagainstpdfendlink}{%
+				\clubpenalty4000
+				\@clubpenalty \clubpenalty
+				\widowpenalty4000%
+				\interlinepenalty=10000% added by TI to avoid the \pdfendlink ended up in different nesting level than \pdfstartlink errors (but this prevents bibtex entries from being broken between columns/pages)
+			}{%
+				\clubpenalty=0% TI: allow breaking
+				\widowpenalty=0% TI: allow breaking
+			}%
       \sfcode`\.\@m%
   }
   {%
@@ -830,7 +856,7 @@
         \vspace{1\baselineskip}
       }%
       \large\sffamily\vgtc@sectionfont
-      \begin{tabular}[t]{c}%
+      \begin{tabular}[t]{@{}c@{}}%
         \@author
       \end{tabular}\par%
       \ifx\vgtc@affiliation\vgtc@empty \else%
