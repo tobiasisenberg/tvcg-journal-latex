@@ -3,6 +3,8 @@
 % OF THE VGTC PUBLICATIONS CHAIR (submissions@vgtc.org).
 %
 % Changelog:
+% - modifications by Graziano Blasilli on 2026/01/23
+%   - addedd inline option in enumitem package to allow compact inline lists (e.g., \begin{enumerate*} ... \end{enumerate*})
 % -modifications by Tobias Isenberg 2025/12/02
 %   - BST files
 %     - abbreviation of ``article no.'' to ``art. no.'' (shorter references)
@@ -325,7 +327,7 @@
 \RequirePackage{times}                       % we use Times as the main font
 \renewcommand*\ttdefault{txtt}               % a nicer typewriter font
 \RequirePackage{cite}                        % needed to automatically sort the references
-\RequirePackage{enumitem}                    % more compact lists
+\RequirePackage[inline]{enumitem}                    % more compact lists
 \setlist[enumerate]{itemsep=1pt,topsep=3pt}
 \setlist[itemize]{itemsep=1pt,topsep=3pt}
 \setlist[description]{itemsep=1pt,topsep=3pt}
