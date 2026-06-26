@@ -10,7 +10,7 @@
 %     - fixed the spacing in the bibliography section, to take a potential PDF linking error into account
 %     - for this purpose also added another option (protectagainstpdfendlink), that can be used in situations
 %       when this hyperref error appears (at the expense of a slightly longer bibliography section)
-%   - BST files: "pages" abbreviation ro "pp." for numpages entry
+%   - BST files: "pages" abbreviation to "pp." for numpages entry
 % -modifications by Tobias Isenberg 2025/12/02
 %   - BST files
 %     - abbreviation of ``article no.'' to ``art. no.'' (shorter references)
