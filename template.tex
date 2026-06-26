@@ -20,7 +20,7 @@
 %\preprinttext{To appear in IEEE Transactions on Visualization and Computer Graphics.}
 
 %% In preprint mode, this adds a link to the version of the paper on IEEEXplore
-%% Uncomment this line when you produce a preprint version of the article 
+%% Uncomment this line when you produce a preprint version of the article
 %% after the article receives a DOI for the paper from IEEE
 %\ieeedoi{xx.xxxx/TVCG.201x.xxxxxxx}
 
@@ -35,7 +35,7 @@
 %% Include only the 16-digit dashed ID.
 \author{%
   \authororcid{Josiah S.\ Carberry}{0000-0002-1825-0097},
-  Ed Grimley, and 
+  Ed Grimley, and
   Martha Stewart
 }
 
@@ -96,7 +96,6 @@
 \graphicspath{{figs/}{figures/}{pictures/}{images/}{./}} % where to search for the images
 
 %% Only used in the template examples. You can remove these lines.
-\usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
 \usepackage{lipsum}                    % used to generate placeholder text
 \usepackage{mwe}                       % used to generate placeholder figures
@@ -253,7 +252,7 @@ Tables, such as \cref{tab:vis_papers} can also be included.
 	\newlength{\digitwidth}%
   \settowidth{\digitwidth}{0}%
   \centering%
-  \begin{tabu}{%
+  \begin{tabular}{%
   	  r%
   	  	*{8}{@{\hspace{5.5pt}}c@{\hspace{5.5pt}}}%
   	  	*{2}{@{\hspace{5.5pt}}r}%
@@ -297,10 +296,10 @@ Tables, such as \cref{tab:vis_papers} can also be included.
   	1992 &     & 53 &   &    &    &    &    &    &  53 &  53 \\
   	1991 &     & 50 &   &    &    &    &    &    &  50 &  50 \\
   	1990 &     & 53 &   &    &    &    &    &    &  53 &  53 \\
-  	\midrule               
+  	\midrule
   	\textbf{sum} & \textbf{616} & \textbf{1657} & \textbf{9} & \textbf{835} & \textbf{481} & \textbf{91} & \textbf{591} & \textbf{131} & \textbf{4411} & \textbf{3689} \\
   	\bottomrule
-  \end{tabu}%
+  \end{tabular}%
 \end{table}
 
 \begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
@@ -409,7 +408,7 @@ You can use the \verb|hideappendix| class option to remove everything after \ver
 We encourage you to submit a full version of your paper to a preprint server with any appendices included.
 
 You can use the \verb|\iflabelexists| macro to cross reference an appendix from the main text, but only if that label (i.e., the appendix) actually exists.
-For example, above we use 
+For example, above we use
 
 \begin{verbatim}
 \iflabelexists{appendix:troubleshooting}
@@ -483,4 +482,3 @@ Occasionally (for some \LaTeX\ distributions) this hyper-linked bib\TeX\ style m
 In this case, make sure you have the latest version of the \verb|hyperref| package (i.e.\ update your \LaTeX\ installation/packages) or, alternatively, revert back to \verb|\bibliographystyle{abbrv-doi}| (at the expense of removing hyperlinks from the bibliography) and try \verb|\bibliographystyle{abbrv-doi-hyperref}| again after some more editing.
 
 \end{document}
-
